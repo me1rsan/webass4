@@ -1,243 +1,147 @@
-/* ======================================= */
-/* БАЗОВЫЕ СТИЛИ И СБРОС (Mobile First) */
-/* ======================================= */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+/* GLOBAL RESET */
 * {
-    box-sizing: border-box; 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4; 
-    color: #333;
-}
-h2 {
-    margin-top: 20px;
-    margin-bottom: 15px;
+html, body {
+  height: 100%;
 }
 
-/* ======================================= */
-/* Task 0/4: Адаптивная Типографика (Media Queries) */
-/* ======================================= */
-/* Mobile First: для экранов < 576px */
-.intro-text {
-    font-size: 1rem; /* 16px */
+/* GRID LAYOUT */
+.page-layout {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  min-height: 100vh;
 }
 
-/* Tablet (min-width: 576px) */
-@media (min-width: 576px) {
-    .intro-text {
-        font-size: 1.25rem; 
-    }
+/* HEADER / NAVBAR */
+nav.header {
+  grid-area: header;
+  background-color: burlywood;
+}
+.nav-button {
+  background-color: #2ecc71;
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  font-family: 'Helvetica Neue', sans-serif;
+  text-decoration: none;
+  border: none;
+}
+.nav-button:hover {
+  background-color: #d2b48c;
 }
 
-/* Desktop (min-width: 992px) */
-@media (min-width: 992px) {
-    .intro-text {
-        font-size: 1.5rem; 
-    }
+/* MAIN AREA */
+.main-area {
+  grid-area: main;
+  background-color: #2ecc71;
+  padding: 20px;
 }
 
-/* ======================================= */
-/* Task 1/4: Responsive Layout (Media Queries) */
-/* ======================================= */
-.responsive-container {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 10px;
-    margin-bottom: 20px;
+/* TYPOGRAPHY (Task 0) */
+h1 {
+  font-size: 1.5rem;
+  margin: 30px 0 20px;
+  color: burlywood;
+  text-align: center;
 }
-.box {
-    background-color: #3498db;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    border-radius: 5px;
-    width: 100%; /* Mobile (1 в ряд) */
+h2, h3, h4 {
+  color: white;
+  text-align: center;
+  font-family: system-ui, sans-serif;
 }
-
-/* Tablet (min-width: 768px - 2 в ряд) */
 @media (min-width: 768px) {
-    .box {
-        width: calc(50% - 5px); 
-    }
+  h1 { font-size: 2.5rem; }
 }
-
-/* Desktop (min-width: 1200px - 3 в ряд) */
 @media (min-width: 1200px) {
-    .box {
-        width: calc(33.333% - 6.66px); 
-    }
+  h1 { font-size: 3rem; }
 }
 
-/* ======================================= */
-/* Task 0/3: Flexbox Navigation */
-/* ======================================= */
-.navbar-container {
-    background-color: #2c3e50;
-    color: white;
-    padding: 15px 30px;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+/* TASK 1: CSS-ONLY RESPONSIVE BOXES */
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
-.logo {
-    font-size: 1.5em;
-    font-weight: bold;
+.boxes div {
+  background-color: #fff;
+  flex: 1 1 100%;
+  text-align: center;
+  padding: 30px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
 }
-.nav-links {
-    display: flex; 
-    gap: 25px; 
+@media (min-width: 768px) {
+  .boxes div { flex: 1 1 48%; }
 }
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-}
-.nav-links a:hover {
-    background-color: #34495e;
-    border-radius: 4px;
+@media (min-width: 1200px) {
+  .boxes div { flex: 1 1 30%; }
 }
 
-/* ======================================= */
-/* Task 2/3: Full Width Grid Layout */
-/* ======================================= */
-.grid-page-layout {
-    display: grid;
-    /* Убраны max-width и margin: auto для растяжения на всю страницу */
-    min-height: 100vh;
-    gap: 10px;
-    
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-        "header-area header-area"
-        "sidebar-area main-area"
-        "footer-area footer-area";
+/* GALLERY (Task 4) */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
 }
-
-/* Применение зон Grid */
-.header-area { grid-area: header-area; } 
-.sidebar-area { 
-    grid-area: sidebar-area; 
-    background-color: #ecf0f1;
-    padding: 20px;
+@media (max-width: 992px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); }
 }
-.main-area { 
-    grid-area: main-area; 
-    background-color: white;
-    padding: 20px;
-}
-.footer-area { 
-    grid-area: footer-area; 
-    background-color: #bdc3c7;
-    padding: 15px;
-    text-align: center;
-}
-
-/* Выравнивание в сайдбаре */
-.sidebar-menu {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
-}
-.sidebar-menu a {
-    display: block;
-    padding: 8px 10px;
-    text-decoration: none;
-    color: #444;
-}
-
-/* ======================================= */
-/* Task 1/3: Flexbox Cards (Equal Height) */
-/* ======================================= */
-.cards-container {
-    display: flex; 
-    gap: 20px; 
-    padding: 20px 0;
-}
-.card-flex {
-    background-color: #f7f7f7;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 6px;
-    flex: 1; /* Ключ к равной ширине и равной ВЫСОТЕ */
-    display: flex;
-    flex-direction: column; /* Контент внутри карточки по колонке */
-    justify-content: space-between;
-}
-.card-flex h4 {
-    margin-bottom: 10px;
-}
-.card-flex p {
-    flex-grow: 1; /* Чтобы текст занял место */
-}
-
-/* ======================================= */
-/* Task 3/3: Image Gallery (CSS Grid) */
-/* ======================================= */
-.gallery-container {
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* 3 равные колонки */
-    gap: 10px;
-    margin-top: 15px;
+@media (max-width: 576px) {
+  .gallery { grid-template-columns: 1fr; }
 }
 .gallery-item {
-    overflow: hidden;
-    border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
 }
 .gallery-item img {
-    display: block;
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.4s;
+}
+.gallery-item:hover .caption {
+  transform: translateY(0);
 }
 
-/* ======================================= */
-/* Task 4/3: Portfolio Page (Grid + Flexbox) */
-/* ======================================= */
-.portfolio-grid {
-    display: grid; 
-    max-width: 100%; /* Занимаем всю ширину */
-    margin: 0;
-    min-height: 100vh;
-    gap: 10px;
-    padding: 10px;
-    background-color: #fff;
-
-    grid-template-columns: 250px 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-        "header header"
-        "sidebar main"
-        "footer footer";
+/* SIDEBAR */
+.sidebar h3, .sidebar h4 {
+  color: burlywood;
+}
+.sidebar p {
+  color: white;
 }
 
-.grid-nav-header { grid-area: header; } 
-.grid-sidebar-info { 
-    grid-area: sidebar; 
-    background-color: #f8f9fa;
-    padding: 20px;
-}
-.grid-projects-main { 
-    grid-area: main; 
-    padding: 20px;
-}
-.grid-footer { 
-    grid-area: footer; 
-    background-color: #e9ecef;
-    padding: 10px;
-    text-align: center;
-}
-
-.mini-project-card {
-    background-color: #ecf0f1;
-    text-align: center;
-    border-radius: 4px;
-    height: 100%; /* Убедиться, что карточки в Bootstrap Grid имеют равную высоту */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* FOOTER */
+.footer-area {
+  grid-area: footer;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-family: system-ui, sans-serif;
 }
